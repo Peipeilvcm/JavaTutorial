@@ -94,7 +94,10 @@ TreeSet<T> ts=new TreeSet<T>(new Comparator<T>() {
 
 // 迭代器遍历
 for(Iterator it = set.iterator(); it.hasNext();){
-    it.next();
+    Object o = it.next();
+    if("实例".equals(o)){
+        it.remove();
+    }
 }
 
 
