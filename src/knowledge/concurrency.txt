@@ -13,3 +13,45 @@
         对变量的写入操作不依赖当前值，或保证只有单个线程更新变量值
         该变量不会与其它状态一起纳入不变性条件
         访问变量期间不需加锁
+
+
+### BIO, 阻塞式IO、同步式IO、不适合大量访问，线程池不适合长访问连接少传数据，
+### NIO, new IO, 可实现异步IO
+Buffer, Channel, Selector
+### 序列化: 讲对象变成比特串输出。ObjectOutputStream(fos) oos; oos.writer(obj);
+transient 可以吧某些属性不进行序列化
+
+## thread
+守护线程，在start前，thread.setDaemon(true)，当主线程退出，这个线程也自动退出
+设置优先级，thread.setPriority();Thread.MAX_PRIORITY
+thread.join(), 主线程等待thread执行完再往后执行
+Collections.synchronizedMap(hashMap),Collections.synchronizedSet(hashSet), Collections.synchronizedList(arrayList) 可以把非线程安全变为安全
+Map<String, Integer> map = Collections.synchronizedMap(new HashMap<String, Integer>())
+ConcurrentHashMap、在外部再加一层所解决put-if-absent问题
+
+### 线程池
+一个请求用一个线程，大量线程额外开销很多。
+线程池，线程数量有限，提前创建
+Executors.newFixedThreadPool(int)
+Executors.newCacheThreadPool() ;// 线程池不固定，和任务有关，最大线程数和JVM有关
+ThreadPoolExecutor.setRejectedExecutionHandler(policy) ; 可以制定线程池满时的策略，可能报错，可能丢弃，可能调用者线程直接执行，放弃最早的线程
+
+### Future 接口， 尝试取消未完成任务，查询任务已经完成还是取消，提取任务结果值
+和 Runnable 功能相近 ,但通过它们可以在任务执行完毕之后得到任务执行结果
+Callable、Future和FutureTask
+CompletionService 可以启动多个线程，然后有一个线程返回成功结束后，把其它线程全部取消
+
+### Semaphore 控制某资源访问个数，acquire() 获取一个许可，没有则等待； release() 释放许可
+### CyclicBarrier 用于线程协同，比如从同一指定点往下执行， 可以使用多次
+### CountDownLatch 在完成一组线程操作前，运行一些线程一直等待，只能使用一次，也可以用来协同
+### Exchanger 提供一个同步点，在这个同步点可以交换数据 exchange() 方法
+
+### Lock
+死锁问题可以用if(tryLock())来解决，放入while循环中，并在if结束unlock
+ReadWriteLock. Reader、Writer, RR可以同时读取，RW、WW互斥
+lock.lock()
+try{
+    do something;
+}finally{
+    lock.unlock();
+}
