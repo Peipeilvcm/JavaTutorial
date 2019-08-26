@@ -1,5 +1,6 @@
 package algorithms;
 
+// 并查集
 public class UF {
     private int[] id;  // 父连接数组
     private int[] sz;  // 各个根节点所对应的分量大小

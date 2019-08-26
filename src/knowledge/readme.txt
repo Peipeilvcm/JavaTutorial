@@ -8,6 +8,7 @@ char c = s.charAt(index);
 char[] c_s = s.toCharArray();
 s = String.valueOf(c_s)
 int index = s.indexOf(int ch);// 未找到返回-1 lastIndexOf
+int index = s.indexOf(str, int startIndex)
 
 
 ## StringBuilder
@@ -166,7 +167,13 @@ InputStream: FileInputStream、SocketInputStream, int len = inS.read(buf) != -1�
 可以用BufferedOutputStream包装 OutputStream out = new BufferedOutputStream(new ObejectOutputStream(new FileOutputStream(new File('filename'))));
 
 ## JVM 虚拟机
-###
+### 编译+解释
+类加载器，自底向上检查，自顶向下加载
+class loader + Execution Engine + Runtime Data Areas
+GC 老年代，年轻代
+
+## 最佳实践
+Queue不需要扩容
 
 
 
