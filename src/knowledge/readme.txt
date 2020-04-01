@@ -176,4 +176,10 @@ GC 老年代，年轻代
 Queue不需要扩容
 
 
-
+## HashMap代码
+Node<K,V>: hash, k, v, Node next
+路由寻址：(Map.length-1)&hash，
+数组实现,数组长度是2的幂，hash方法后加扰动(让hashcode高16位参与进来减少碰撞)
+插链法解决冲突、链表长度大于阈值后红黑树 树化链表
+扩容方法resize()，扩容有threshold=capacity*loadFactory，注意链表的复制，树的复制
+V put() 延迟初始化散列表
